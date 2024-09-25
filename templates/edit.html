@@ -1,0 +1,31 @@
+{% extends 'main.html' %}
+{% load static %}
+
+
+{% block title %}
+
+Bu edit sahifa
+{% endblock %}
+
+
+{% block home %}
+<h1>Edit qismi</h1>
+<center>
+    <!-- detail here -->
+    <br>
+    <br>
+    <br>
+
+    <div class="container">
+        <form method="POST" enctype="multipart/form-data">
+            {%csrf_token%}
+            {{form.as_p}}
+            <button type="submit" class="btn">save</button>
+        </form>
+    </div>
+
+
+</center>
+ 
+
+{% endblock %}

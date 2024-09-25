@@ -1,0 +1,51 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block title %}
+
+Bu my-acount sahifa
+
+{% endblock %}
+
+{% block home %}
+
+<br>
+<br>
+<br>
+<br>
+
+
+
+<h1>My Products</h1>
+<ul>
+    {% for product in myproduct %}
+     
+    {% endfor %}
+</ul>
+
+<div class="container">
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+
+      {% for i in myproduct  reversed %}
+      
+      <div class="col">
+        <div class="card">
+          <a href="{% url 'detail' i.id %}"> 
+            {% if i.product_images.exists %}
+            <img src="{{i.product_images.first.image.url}}" class="card-img-top" style="width: 413px; height: 300px; object-fit: cover;">
+            {% else %}
+            <img src="{{i.rasm.url}}" class="card-img-top">
+            {% endif %}
+            <div class="card-body">
+            <h5 class="card-title">{{i.name|truncatewords:3}}</h5>
+            <p class="card-text">{{i.description|truncatewords:3}}</p>
+          </div>
+          </a>
+        </div>
+      </div>
+      {% endfor %}
+
+    </div>
+  </div>
+
+{% endblock %}

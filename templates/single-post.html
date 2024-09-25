@@ -1,0 +1,277 @@
+{% extends 'main.html' %}
+{% load static %}
+
+
+{% block title %}
+
+Bu edit sahifa
+
+{% endblock %}
+
+
+{% block home %}
+
+<h2>Hello world</h2>
+
+
+
+<center>
+  <!-- edit here -->
+  <br>
+  <br>
+  <br>
+  <div class="container">
+    <div class="row">
+      <div class="col-6">
+        <span>
+
+          {% if one.product_images.exists %}
+
+          <!-- ======= Hero Slider Section ======= -->
+          <section id="hero-slider" class="hero-slider">
+            <div class="container-md" data-aos="fade-in">
+              <div class="row">
+                <div class="col-12">
+                  <div class="swiper sliderFeaturedPosts">
+                    <div class="swiper-wrapper">
+                      {% for photo in one.product_images.all %}
+                      <div class="swiper-slide">
+                        <a href="single-post.html" class="img-bg d-flex align-items-end"
+                          style="background-image: url('{{photo.image.url}}');">
+                          <div class="img-bg-inner">
+                          </div>
+                        </a>
+                      </div>
+                      {% endfor %}
+                    </div>
+                    <div class="custom-swiper-button-next">
+                      <span class="bi-chevron-right"></span>
+                    </div>
+                    <div class="custom-swiper-button-prev">
+                      <span class="bi-chevron-left"></span>
+                    </div>
+
+                    <div class="swiper-pagination"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section><!-- End Hero Slider Section -->
+
+
+          {% else %}
+          <img src="{{one.rasm.url}}" style="width: 900px;" z>
+          {% endif %}
+        </span>
+      </div>
+      <div class="col-5 mt-3">
+        <span>
+          <h1 style="padding-top:100px">{{one.name}}</h1>
+          
+          
+          {% if request.user == one.user %}
+          <a href="{% url 'edit' one.id %}"><i class="bi bi-pencil"></i></a>
+          <button type="button" style="border: none; border-radius: 40px;"  data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="bi bi-trash3-fill"></i></button>
+          <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="staticBackdropLabel">DELETE</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" style="color: red;">
+                  Aniq o'shirishni hohlaysizmi ?
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">YOQ</button>
+                  <button type="button" class="btn btn-primary"><a href="{% url 'delate' one.id %} "
+                      class="btn btn-primary">HA</a></button>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endif %}
+          <p>{{one.description}}</p>
+        </span>
+        <br>
+        <br>
+        <br>
+
+        <!--comment-->
+        <style>
+          .comments {
+              max-width: 800px;
+              margin: 20px auto;
+              padding: 20px;
+              border: 1px solid #ddd;
+              border-radius: 8px;
+              background-color: #f9f9f9;
+          }
+          .comment, .reply {
+              background-color: #fff;
+              padding: 15px;
+              border-radius: 5px;
+              box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+              margin-bottom: 15px;
+          }
+          .comment-title {
+              font-weight: bold;
+          }
+          .avatar {
+              width: 40px;
+              height: 40px;
+          }
+          .reply-meta h6 {
+              font-size: 0.9em;
+          }
+          .comment-replies {
+              background-color: #f1f1f1;
+              padding: 15px;
+              border-radius: 5px;
+          }
+          .comment-replies-title {
+              font-weight: bold;
+          }
+      </style>
+<div></div>
+       
+
+      </div>
+      <div><h1>Salom</h1>
+
+        <!-- ======= Comments ======= -->
+            
+        <div class="comments">
+          {% if one.product_comments.exists %}
+          <div id="some"></div>
+          <h5 class="comment-title py-4">{{one.product_comments.count}}  Comments</h5>
+          
+          {% for comment in one.product_comments.all %}
+          {% if not comment.reply %}
+          <div class="comment d-flex mb-4">
+            <div class="flex-shrink-0">
+              <div class="avatar avatar-sm rounded-circle">
+                <img class="avatar-img" src="{{comment.user.photo.url}}" alt="" class="img-fluid">
+              </div>
+            </div>
+            <div class="flex-grow-1 ms-2 ms-sm-3">
+              <div class="comment-meta d-flex align-items-baseline">
+                <h6 class="me-2">{{comment.user.username}}</h6>
+              </div>
+              <div class="comment-body">{{comment.comment}}
+              </div>
+              <button type="button" style="border:none;"  data-bs-toggle="modal" data-bs-target="#exampleModal{{comment.id}}" data-bs-whatever="@mdo">reply</button>
+              <!-- start modal -->
+              <div class="modal fade" id="exampleModal{{comment.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h1 class="modal-title fs-5" id="exampleModalLabel">New message</h1>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      {% if user.is_authenticated %}
+                      <form method="post">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                          <label for="message-text" class="col-form-label">Message:</label>
+                          <textarea class="form-control" id="message-text" name="reply"></textarea>
+                          <input type="hidden" name="comment_id" value="{{comment.id}}">
+                          <input type="hidden" name="name" value="some">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Send message</button>
+                      </form>
+                      {% else %}
+                      <h3><a href="{% url 'login' %}">login</a></h3>
+                      {% endif%}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- end modal -->
+              {% if comment.replies.exists %}
+              <!-- start reply -->
+              <div class="comment-replies bg-light p-3 mt-3 rounded">
+                <h6 class="comment-replies-title mb-4 text-muted text-uppercase">{{comment.replies.count}} replies</h6>
+                {% for reply in comment.replies.all %}
+                <div class="reply d-flex mb-4">
+                  <div class="flex-shrink-0">
+                    <div class="avatar avatar-sm rounded-circle">
+                      <img class="avatar-img" src="{{reply.user.photo.url}}" alt="" class="img-fluid">
+                    </div>
+                  </div>
+                  <div class="flex-grow-1 ms-2 ms-sm-3">
+                    <div class="reply-meta d-flex align-items-baseline">
+                      <h6 class="mb-0 me-2">{{reply.user.uername}}</h6>
+                    </div>
+                    <div class="reply-body">
+                      {{reply.comment}}
+                    </div>
+                  </div>
+                </div>
+                {% endfor %}
+              
+              </div>
+              {% else %}
+              <h6 class="comment-replies-title mb-4 text-muted text-uppercase">No replies</h6>
+              {% endif %}
+              <!-- modal start -->
+             
+              <!-- end reply -->
+            </div>
+          </div>
+          {% endif %}
+          {% endfor %}
+          
+
+        {% else %}
+        <h5 class="comment-title py-4">Izohlar mavjud emas ...</h5>
+        {% endif %}
+        </div><!-- End Comments -->
+
+
+
+
+        <!-- ======= Comments Form ======= -->
+        <div class="row justify-content-center mt-5">
+
+          <div class="col-lg-12">
+            <h5 class="comment-title">Leave a Comment</h5>
+            <div class="row">
+
+              <form action="" method="post">
+                {% csrf_token %}
+                <div class="col-6 mb-3">
+                  <label for="comment-message">Message</label>
+                  <textarea name="izoh" class="form-control" id="comment-message" placeholder="Enter your name"
+                    cols="30" rows="10"></textarea>
+                  <input type="hidden" name="name" value="some">
+                  <br>
+                  <div class="col-12">
+                    <input type="submit" value="Post comment">
+                  </div>
+                </div>
+              </form>
+
+            </div>
+          </div>
+        </div><!-- End Comments Form -->
+</div>
+    </div>
+
+
+
+  </div>
+
+  <!-- <span>{{one.narxi}}$ | {{one.yili}} | {{one.rangi}} | {{one.batafsil}}</span> -->
+  <br>
+  <!-- {% for i in mashinalar reversed %}
+        <h1>{{i.nomi}}</h1>
+        <p></p>
+        <span>{{i.narxi}}$ | {{i.yili}} | {{i.rangi}} | {{i.batafsil}}</span>
+        {% endfor %} -->
+</center>
+
+
+{% endblock %}
