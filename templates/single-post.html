@@ -12,6 +12,38 @@ Bu edit sahifa
 {% block home %}
 
 <h2>Hello world</h2>
+<!-- CSS for responsive design -->
+<style>
+  .hero-slider {
+      position: relative;
+      overflow: hidden;
+  }
+
+  .swiper-slide {
+      background-size: cover;
+      background-position: center;
+      height: 400px; /* Kompyuter uchun balandlik */
+  }
+
+  @media (max-width: 768px) {
+      .swiper-slide {
+          height: 250px; /* Mobil telefonlar uchun balandlik */
+      }
+  }
+
+  .img-bg {
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      height: 100%;
+      color: white; /* Matn rangini oq qilib qo'yish */
+  }
+
+  .img-bg-inner {
+      padding: 20px;
+      background: rgba(0, 0, 0, 0.5); /* Orqa fonni yarim shaffof qilish */
+  }
+</style>
 
 
 
@@ -28,7 +60,36 @@ Bu edit sahifa
           {% if one.product_images.exists %}
 
           <!-- ======= Hero Slider Section ======= -->
-          <section id="hero-slider" class="hero-slider">
+          <!-- Slider Section -->
+<section id="hero-slider" class="hero-slider">
+  <div class="container-md" data-aos="fade-in">
+      <div class="row">
+          <div class="col-12">
+              <div class="swiper sliderFeaturedPosts">
+                  <div class="swiper-wrapper">
+                      {% for photo in one.product_images.all %}
+                      <div class="swiper-slide">
+                          <a href="single-post.html" class="img-bg d-flex align-items-end"
+                             style="background-image: url('{{photo.image.url}}');">
+                              <div class="img-bg-inner">
+                              </div>
+                          </a>
+                      </div>
+                      {% endfor %}
+                  </div>
+                  <div class="custom-swiper-button-next">
+                      <span class="bi-chevron-right"></span>
+                  </div>
+                  <div class="custom-swiper-button-prev">
+                      <span class="bi-chevron-left"></span>
+                  </div>
+                  <div class="swiper-pagination"></div>
+              </div>
+          </div>
+      </div>
+  </div>
+</section><!-- End Hero Slider Section -->
+          <!-- <section id="hero-slider" class="hero-slider">
             <div class="container-md" data-aos="fade-in">
               <div class="row">
                 <div class="col-12">
@@ -56,7 +117,7 @@ Bu edit sahifa
                 </div>
               </div>
             </div>
-          </section><!-- End Hero Slider Section -->
+          </section>End Hero Slider Section -->
 
 
           {% else %}
