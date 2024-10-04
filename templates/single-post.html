@@ -22,12 +22,12 @@ Bu edit sahifa
   .swiper-slide {
       background-size: cover;
       background-position: center;
-      height: 400px; /* Kompyuter uchun balandlik */
+      height: 1400px; /* Kompyuter uchun balandlik */
   }
 
   @media (max-width: 768px) {
       .swiper-slide {
-          height: 250px; /* Mobil telefonlar uchun balandlik */
+          height: 380px; /* Mobil telefonlar uchun balandlik */
       }
   }
 
@@ -54,70 +54,41 @@ Bu edit sahifa
   <br>
   <div class="container">
     <div class="row">
-      <div class="col-6">
+      <div class="">
         <span>
 
           {% if one.product_images.exists %}
 
-          <!-- ======= Hero Slider Section ======= -->
-          <!-- Slider Section -->
-<section id="hero-slider" class="hero-slider">
-  <div class="container-md" data-aos="fade-in">
-      <div class="row">
-          <div class="col-12">
-              <div class="swiper sliderFeaturedPosts">
-                  <div class="swiper-wrapper">
-                      {% for photo in one.product_images.all %}
-                      <div class="swiper-slide">
-                          <a href="single-post.html" class="img-bg d-flex align-items-end"
-                             style="background-image: url('{{photo.image.url}}');">
-                              <div class="img-bg-inner">
-                              </div>
-                          </a>
-                      </div>
-                      {% endfor %}
-                  </div>
-                  <div class="custom-swiper-button-next">
-                      <span class="bi-chevron-right"></span>
-                  </div>
-                  <div class="custom-swiper-button-prev">
-                      <span class="bi-chevron-left"></span>
-                  </div>
-                  <div class="swiper-pagination"></div>
-              </div>
-          </div>
-      </div>
-  </div>
-</section><!-- End Hero Slider Section -->
-          <!-- <section id="hero-slider" class="hero-slider">
+                    <!-- ======= Hero Slider Section ======= -->
+                    <!-- Slider Section -->
+          <section id="hero-slider" class="hero-slider">
             <div class="container-md" data-aos="fade-in">
-              <div class="row">
-                <div class="col-12">
-                  <div class="swiper sliderFeaturedPosts">
-                    <div class="swiper-wrapper">
-                      {% for photo in one.product_images.all %}
-                      <div class="swiper-slide">
-                        <a href="single-post.html" class="img-bg d-flex align-items-end"
-                          style="background-image: url('{{photo.image.url}}');">
-                          <div class="img-bg-inner">
-                          </div>
-                        </a>
-                      </div>
-                      {% endfor %}
+                <div class="row">
+                    <div class="col-12">
+                        <div class="swiper sliderFeaturedPosts">
+                            <div class="swiper-wrapper">
+                                {% for photo in one.product_images.all %}
+                                <div class="swiper-slide">
+                                    <a href="" class="img-bg d-flex align-items-end"
+                                      style="background-image: url('{{photo.image.url}}');">
+                                        <div class="img-bg-inner">
+                                        </div>
+                                    </a>
+                                </div>
+                                {% endfor %}
+                            </div>
+                            <div class="custom-swiper-button-next">
+                                <span class="bi-chevron-right"></span>
+                            </div>
+                            <div class="custom-swiper-button-prev">
+                                <span class="bi-chevron-left"></span>
+                            </div>
+                            <div class="swiper-pagination"></div>
+                        </div>
                     </div>
-                    <div class="custom-swiper-button-next">
-                      <span class="bi-chevron-right"></span>
-                    </div>
-                    <div class="custom-swiper-button-prev">
-                      <span class="bi-chevron-left"></span>
-                    </div>
-
-                    <div class="swiper-pagination"></div>
-                  </div>
                 </div>
-              </div>
             </div>
-          </section>End Hero Slider Section -->
+          </section><!-- End Hero Slider Section -->
 
 
           {% else %}
@@ -125,10 +96,9 @@ Bu edit sahifa
           {% endif %}
         </span>
       </div>
-      <div class="col-5 mt-3">
+      <div class="">
         <span>
           <h1 style="padding-top:100px">{{one.name}}</h1>
-          
           
           {% if request.user == one.user %}
           <a href="{% url 'edit' one.id %}"><i class="bi bi-pencil"></i></a>
