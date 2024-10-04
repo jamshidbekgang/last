@@ -70,6 +70,30 @@
       </div>
     </section><!-- End Hero Slider Section -->
 
+    
+    <div class="container">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
+          {% for i in all_products reversed %}
+          <div class="col">
+              <div class="card">
+                  <a href="{% url 'detail' i.id %}"> 
+                      {% if i.product_images.exists %}
+                      <img src="{{i.product_images.first.image.url}}" class="card-img-top" style="width: 100%; height: auto; object-fit: cover;">
+                      {% else %}
+                      <img src="{{i.rasm.url}}" class="card-img-top" style="width: 100%; height: auto; object-fit: cover;">
+                      {% endif %}
+                      <div class="card-body">
+                          <h5 class="card-title">{{i.name|truncatewords:3}}</h5>
+                          <p class="card-text">{{i.description|truncatewords:3}}</p>
+                      </div>
+                  </a>
+              </div>
+          </div>
+          {% endfor %}
+      </div>
+  </div>
+  
+<!-- 
     <div class="container">
       <div class="row row-cols-1 row-cols-md-3 g-4">
 
@@ -94,7 +118,7 @@
         {% endfor %}
         
       </div>
-    </div>
+    </div> -->
 
 
  
