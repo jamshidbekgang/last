@@ -148,7 +148,7 @@ def home(request):
 
 
 
-@login_required(login_url='login')
+# @login_required(login_url='login')
 def detail(request, id):
     f = {'one': Product.objects.get(id=id)}
     if request.POST.get('izoh'):

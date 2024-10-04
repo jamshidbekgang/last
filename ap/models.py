@@ -67,3 +67,10 @@ class Comment(models.Model):
     def __str__(self) -> str:
         return self.comment
 
+
+# class Discount:
+#     name = 
+#     description = 
+#     rasm = 
+#     foiz = 
+#     product = 
