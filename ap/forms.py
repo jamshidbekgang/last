@@ -51,7 +51,8 @@ class LoginForm(forms.Form):
 class EditForm(forms.ModelForm):
 	class Meta:
 		model = Product
-		fields = ['name','description','price','category', 'tags', 'rasm']         
+		fields = ['name','description','price','category', 'tags', 'rasm']  
+               
 
 class ProductImagesForm(forms.ModelForm):
 	class Meta:
