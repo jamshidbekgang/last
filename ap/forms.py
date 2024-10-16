@@ -49,10 +49,16 @@ class LoginForm(forms.Form):
             self.fields[i].widget.attrs.update({'class': 'form-control'})
 
 class EditForm(forms.ModelForm):
-	class Meta:
-		model = Product
-		fields = ['name','description','price','category', 'tags', 'rasm']  
-               
+    class Meta:
+        model = Product
+        fields = ['name','description','price','category', 'tags', 'rasm']  
+    
+    def __init__(self, *a, **b) -> None:
+        super().__init__(*a, **b)
+        
+        for i in self.fields:
+            self.fields[i].widget.attrs.update({'class': 'form-control'})
+         
 
 class ProductImagesForm(forms.ModelForm):
 	class Meta:
